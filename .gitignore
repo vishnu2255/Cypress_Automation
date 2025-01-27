@@ -1,0 +1,14 @@
+# Node.js dependencies
+node_modules/
+
+# Cypress-related files
+cypress/screenshots/
+cypress/videos/
+cypress/reports/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# IDE and editor settings
+.vscode/
