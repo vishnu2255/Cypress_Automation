@@ -1,0 +1,40 @@
+name: Run Cypress Tests
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Run Cypress tests
+      - name: Run Cypress Tests
+        run: npx cypress run
+
+      # Step 5: Upload artifacts
+      - name: Upload Test Artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts
+          path: cypress/screenshots/
+          retention-days: 7
+
+     
