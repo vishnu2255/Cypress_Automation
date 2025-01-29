@@ -6,6 +6,7 @@ describe("Validate Random Date Generator", () => {
     cy.visit("https://www.random.org/calendar-dates/");
   });
 
+  // we can move this to fixtures if we plan to scale the testData or use it in multiple tests
   const testCases = [
     {
       numOfDates: "4",
@@ -72,16 +73,11 @@ describe("Validate Random Date Generator", () => {
 
       cy.get(dateGenerator.btnSubmit).click();
 
-      if(numOfDates === "1") {
-        cy.get("p")
-        .contains("Here is your calendar date")
-        .should("be.visible");
-      }else {
-        cy.get("p")
-        .contains("Here are your " + numOfDates + " calendar dates:")
-        .should("be.visible");
-      }
-     
+      const resultText =
+          numOfDates === "1"
+            ? "Here is your calendar date"
+            : `Here are your ${numOfDates} calendar dates:`;
+      cy.get("p").contains(resultText).should("be.visible");
 
       cy.get(dateGenerator.datesListParagraph)
         .invoke("text")

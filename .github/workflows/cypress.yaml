@@ -36,5 +36,13 @@ jobs:
           name: cypress-artifacts
           path: cypress/screenshots/
           retention-days: 7
-
+          
+    # Step 6: Publish test results
+      - name: Publish Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-test-results
+          path: cypress/results/
+          retention-days: 7 
      
